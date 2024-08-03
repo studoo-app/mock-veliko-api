@@ -45,7 +45,8 @@ WORKDIR /var/www/
 
 # clone API
 RUN git clone https://github.com/studoo-app/mock-veliko-api.git
-RUN cd mock-veliko-api && composer install && composer edu:init
+RUN cd mock-veliko-api && composer install
+RUN cd mock-veliko-api && cp .env.example .env
 RUN chmod 777 -R /var/www/mock-veliko-api
 RUN chown -R www-data:www-data /var/www/mock-veliko-api
 RUN service apache2 restart

@@ -5,5 +5,3 @@ vendor/
 var/
 composer.phar
 composer.lock
-# Ignore .env file containing secure information
-.env
