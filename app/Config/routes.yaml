@@ -1,0 +1,4 @@
+api_init:
+    uri: /api/init
+    controller: Controller\api\InitController
+    httpMethod: [GET]
