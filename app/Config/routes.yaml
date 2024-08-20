@@ -6,7 +6,11 @@ api_station:
     uri: /api/stations
     controller: Controller\api\Station\StationsController
     httpMethod: [GET]
-api_station_select:
+api_station_id:
     uri: /api/station/{id}
     controller: Controller\api\Station\StationIdController
+    httpMethod: [GET]
+api_station_id_status:
+    uri: /api/station/{id}/status
+    controller: Controller\api\Station\StationStatusIdController
     httpMethod: [GET]

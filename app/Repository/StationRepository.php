@@ -57,6 +57,14 @@ class StationRepository
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function getOneStationStatus(int $id): mixed
+    {
+        $stmt = $this->db->prepare('SELECT * FROM station, station_status WHERE station.station_id = :id AND station.station_id = station_status.station_id');
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     /**
      * Vider la table `Station`
      */
