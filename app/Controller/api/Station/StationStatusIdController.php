@@ -9,6 +9,7 @@ use Studoo\EduFramework\Core\Controller\Request;
 class StationStatusIdController implements ControllerInterface
 {
 	#[Attributes\Get(path: '/api/station/{id}/status')]
+    #[Attributes\Parameter(name: 'id', in: 'path', required: true, schema: new Attributes\Schema(type: 'integer'))]
 	#[Attributes\Response(response: '200', description: 'Status d une station')]
 	public function execute(Request $request): string|null
 	{

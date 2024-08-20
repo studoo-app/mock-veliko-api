@@ -1,0 +1,49 @@
+openapi: 3.0.0
+info:
+  title: 'API VELIKO'
+  version: '0.1'
+paths:
+  /api/init:
+    get:
+      operationId: 51ddec15bed83501644f9a96223ed94d
+      responses:
+        '200':
+          description: "Initialisation de l'API VELIKO"
+  '/api/station/{id}':
+    get:
+      operationId: 98fe142cc67ad17ce9be40641bff0dea
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'Liste d une station'
+  '/api/station/{id}/status':
+    get:
+      operationId: c88d3fde4f65bdeed4135502b0017ee5
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'Status d une station'
+  /api/stations:
+    get:
+      operationId: b28855f9a0f755f01567d1fb013b74ea
+      responses:
+        '200':
+          description: 'Liste des stations'
+  /api/stations/status:
+    get:
+      operationId: e3c3f3783a3d3afe64f892666af66315
+      responses:
+        '200':
+          description: 'Liste des status des stations'
