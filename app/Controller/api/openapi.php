@@ -4,7 +4,7 @@ namespace Controller\api;
 
 use OpenApi\Attributes;
 
-#[Attributes\Info(title: 'My First API', version: '0.1')]
+#[Attributes\Info(title: 'API VELIKO', version: '0.1')]
 class openapi
 {
 }
