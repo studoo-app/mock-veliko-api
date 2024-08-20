@@ -21,7 +21,18 @@ paths:
             type: integer
       responses:
         '200':
-          description: 'Liste d une station'
+          description: "Liste d'une station"
+          content:
+            application/json:
+              examples:
+                /api/station/213688169:
+                  summary: /api/station/213688169
+                  value: { station_id: 213688169, stationCode: '16107', name: 'Benjamin Godard - Victor Hugo', lat: 48.865983, lon: 2.275725, capacity: 35 }
+          links:
+            stations:
+              operationId: getStations
+              parameters:
+                id: '$response.body#/station_id'
   '/api/station/{id}/status':
     get:
       operationId: c88d3fde4f65bdeed4135502b0017ee5
