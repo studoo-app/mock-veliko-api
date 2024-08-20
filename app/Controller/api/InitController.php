@@ -3,6 +3,7 @@
 namespace Controller\api;
 
 use OpenApi\Attributes;
+use Repository\StationRepository;
 use Studoo\EduFramework\Core\Controller\ControllerInterface;
 use Studoo\EduFramework\Core\Controller\Request;
 
@@ -14,7 +15,14 @@ class InitController implements ControllerInterface
 	{
 		header('Content-Type: application/json');
 
-        // TODO Initialisation de l'API VELIKO
+        // Fetch data from API
+        $apiUrl = 'https://velib-metropole-opendata.smovengo.cloud/opendata/Velib_Metropole/station_information.json';
+        $jsonData = file_get_contents($apiUrl);
+        $data = json_decode($jsonData, true);
+
+        foreach ($data["data"]["stations"] as $item) {
+            (new StationRepository())->insert($item);
+        }
 
         $listTest = [
             "status" => "success",
