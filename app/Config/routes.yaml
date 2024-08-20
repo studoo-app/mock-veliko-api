@@ -3,6 +3,10 @@ api_init:
     controller: Controller\api\InitController
     httpMethod: [GET]
 api_station:
-    uri: /api/Stations
+    uri: /api/stations
     controller: Controller\api\Station\StationsController
+    httpMethod: [GET]
+api_station_select:
+    uri: /api/station/{id}
+    controller: Controller\api\Station\StationIdController
     httpMethod: [GET]

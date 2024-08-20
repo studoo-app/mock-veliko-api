@@ -6,15 +6,15 @@ use OpenApi\Attributes;
 use Studoo\EduFramework\Core\Controller\ControllerInterface;
 use Studoo\EduFramework\Core\Controller\Request;
 
-class StationsController implements ControllerInterface
+class StationIdController implements ControllerInterface
 {
-	#[Attributes\Get(path: '/api/stations')]
-	#[Attributes\Response(response: '200', description: 'Liste des stations')]
+	#[Attributes\Get(path: '/api/station/{id}')]
+	#[Attributes\Response(response: '200', description: 'Liste d une station')]
 	public function execute(Request $request): string|null
 	{
 		header('Content-Type: application/json');
 
-        $data = (new \Repository\StationRepository())->getAllStations();
+        $data = (new \Repository\StationRepository())->getOneStation($request->get('id'));
 
 		return json_encode($data);
 	}
