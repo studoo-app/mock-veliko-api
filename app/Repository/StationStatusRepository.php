@@ -38,6 +38,18 @@ class StationStatusRepository
     }
 
     /**
+     * Récupérer toutes les status des stations
+     *
+     * @return array
+     */
+    public function getAllStationsStatus(): array
+    {
+        $stmt = $this->db->prepare('SELECT * FROM station_status');
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
      * Vider la table `station_status`
      */
     public function truncateTable(): void
