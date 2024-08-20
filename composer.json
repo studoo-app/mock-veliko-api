@@ -5,10 +5,11 @@
   "minimum-stability": "dev",
   "license": "MIT",
   "require": {
-    "php": ">=8.1",
+    "php": ">=8.2",
     "ext-mbstring": "*",
     "studoo/edu-framework": "2.x-dev",
-    "zircote/swagger-php": "^4.0@dev"
+    "zircote/swagger-php": "^4.0@dev",
+    "ext-pdo": "*"
   },
   "autoload": {
     "psr-4": {

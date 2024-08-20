@@ -18,6 +18,8 @@ class StationRepository
     }
 
     /**
+     * Inserer une station
+     *
      * @param array $item
      * @return void
      */
@@ -33,5 +35,14 @@ class StationRepository
             ':lon' => $item['lon'],
             ':capacity' => $item['capacity']
         ]);
+    }
+
+    /**
+     * Vider la table `station`
+     */
+    public function truncateTable(): void
+    {
+        $stmt = $this->db->prepare('DELETE FROM station WHERE 1=1');
+        $stmt->execute();
     }
 }

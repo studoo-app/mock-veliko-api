@@ -4,24 +4,13 @@ namespace Entity;
 
 class Station
 {
-    private int $id;
+
     private int $station_id;
     private int $stationCode;
     private string $name;
     private float $lat;
     private float $lon;
     private int $capacity;
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function setId(int $id): Station
-    {
-        $this->id = $id;
-        return $this;
-    }
 
     public function getStationId(): int
     {

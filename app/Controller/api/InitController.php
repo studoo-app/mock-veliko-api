@@ -4,6 +4,7 @@ namespace Controller\api;
 
 use OpenApi\Attributes;
 use Repository\StationRepository;
+use Repository\StationStatusRepository;
 use Studoo\EduFramework\Core\Controller\ControllerInterface;
 use Studoo\EduFramework\Core\Controller\Request;
 
@@ -15,13 +16,25 @@ class InitController implements ControllerInterface
 	{
 		header('Content-Type: application/json');
 
-        // Fetch data from API
-        $apiUrl = 'https://velib-metropole-opendata.smovengo.cloud/opendata/Velib_Metropole/station_information.json';
-        $jsonData = file_get_contents($apiUrl);
-        $data = json_decode($jsonData, true);
+        (new StationRepository())->truncateTable();
+        (new StationStatusRepository())->truncateTable();
 
-        foreach ($data["data"]["stations"] as $item) {
+        // Fetch data on station_information
+        $apiUrlStation = 'https://velib-metropole-opendata.smovengo.cloud/opendata/Velib_Metropole/station_information.json';
+        $jsonDataStation = file_get_contents($apiUrlStation);
+        $dataStation = json_decode($jsonDataStation, true);
+
+        foreach ($dataStation["data"]["stations"] as $item) {
             (new StationRepository())->insert($item);
+        }
+
+        // Fetch data on station_status
+        $apiUrlStatus = 'https://velib-metropole-opendata.smovengo.cloud/opendata/Velib_Metropole/station_status.json';
+        $jsonDataStatus = file_get_contents($apiUrlStatus);
+        $dataStatus = json_decode($jsonDataStatus, true);
+
+        foreach ($dataStatus["data"]["stations"] as $item) {
+            (new StationStatusRepository())->insert($item);
         }
 
         $listTest = [
