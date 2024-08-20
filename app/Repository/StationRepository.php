@@ -18,14 +18,14 @@ class StationRepository
     }
 
     /**
-     * Inserer une station
+     * Inserer une Station
      *
      * @param array $item
      * @return void
      */
     public function insert(array $item): void
     {
-        $stmt = $this->db->prepare('INSERT INTO station (station_id, stationCode, name, lat, lon, capacity) VALUES (:station_id, :stationCode, :name, :lat, :lon, :capacity)');
+        $stmt = $this->db->prepare('INSERT INTO Station (station_id, stationCode, name, lat, lon, capacity) VALUES (:station_id, :stationCode, :name, :lat, :lon, :capacity)');
 
         $stmt->execute([
             ':station_id' => $item['station_id'],
@@ -38,11 +38,24 @@ class StationRepository
     }
 
     /**
-     * Vider la table `station`
+     * Récupérer toutes les stations
+     *
+     * @return array
+     */
+    public function getAllStations(): array
+    {
+        $stmt = $this->db->prepare('SELECT * FROM station');
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Vider la table `Station`
      */
     public function truncateTable(): void
     {
-        $stmt = $this->db->prepare('DELETE FROM station WHERE 1=1');
+        $stmt = $this->db->prepare('DELETE FROM Station WHERE 1=1');
         $stmt->execute();
     }
 }
+

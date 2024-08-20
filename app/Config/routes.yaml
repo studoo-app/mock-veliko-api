@@ -2,3 +2,7 @@ api_init:
     uri: /api/init
     controller: Controller\api\InitController
     httpMethod: [GET]
+api_station:
+    uri: /api/Stations
+    controller: Controller\api\Station\StationsController
+    httpMethod: [GET]
