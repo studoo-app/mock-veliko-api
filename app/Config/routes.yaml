@@ -2,16 +2,20 @@ api_init:
     uri: /api/init
     controller: Controller\api\InitController
     httpMethod: [GET]
+doc:
+    uri: /doc
+    controller: Controller\DocController
+    httpMethod: [GET]
 api_stations:
     uri: /api/stations
     controller: Controller\api\Station\StationsController
     httpMethod: [GET]
 api_station_id:
-    uri: /api/station/{id}
+    uri: '/api/station/{id}'
     controller: Controller\api\Station\StationIdController
     httpMethod: [GET]
 api_station_id_status:
-    uri: /api/station/{id}/status
+    uri: '/api/station/{id}/status'
     controller: Controller\api\Station\StationStatusIdController
     httpMethod: [GET]
 api_stations_status:
