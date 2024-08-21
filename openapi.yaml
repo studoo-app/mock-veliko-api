@@ -5,56 +5,92 @@ info:
 paths:
   /api/init:
     get:
-      operationId: 51ddec15bed83501644f9a96223ed94d
+      summary: initAPI
+      description: "Initialisation de l'API VELIKO se fait au dédut projet. Elle permet de récupérer les données des stations et des status des stations sur API officielle de VELIB"
+      operationId: initApi
       responses:
         '200':
-          description: "Initialisation de l'API VELIKO"
+          description: "Initialisation de l'API VELIKO est excutée avec succès"
+          content:
+            application/json:
+              examples:
+                /api/init:
+                  summary: /api/init
+                  value: { status: success, message: 'API VELIKO is running' }
+        '500':
+          description: 'Erreur interne du serveur'
+          content:
+            application/json:
+              examples:
+                error:
+                  summary: 'Erreur interne'
+                  value: { status: error, message: 'Une erreur interne est survenue, veuillez regarder les logs serveur' }
   '/api/station/{id}':
     get:
-      operationId: 98fe142cc67ad17ce9be40641bff0dea
+      description: "Récupérer les informations d une station par son ID (station_id)<br>\n        La description des champs:<br>\n        - station_id: ID de la station<br>\n        - stationCode: Code de la station<br>\n        - name: Nom de la station<br>\n        - lat: Latitude de la station<br>\n        - lon: Longitude de la station<br>\n        - capacity: Capacité de la station<br>\n        "
+      operationId: getStationById
       parameters:
         -
           name: id
           in: path
+          description: 'ID de la station'
           required: true
           schema:
             type: integer
       responses:
         '200':
-          description: "Liste d'une station"
+          description: "Liste d'une station est transmise avec succès"
           content:
             application/json:
               examples:
                 /api/station/213688169:
                   summary: /api/station/213688169
                   value: { station_id: 213688169, stationCode: '16107', name: 'Benjamin Godard - Victor Hugo', lat: 48.865983, lon: 2.275725, capacity: 35 }
-          links:
-            stations:
-              operationId: getStations
-              parameters:
-                id: '$response.body#/station_id'
   '/api/station/{id}/status':
     get:
-      operationId: c88d3fde4f65bdeed4135502b0017ee5
+      description: "Récupérer le status d une station par son ID (station_id)<br>\n        Statut d une station dans son état actuel, celle-ci à une timestamp de dernière mise à jour (last_reported).<br>\n        La description des champs:<br>\n        - station_id: ID de la station<br>\n        - stationCode: Code de la station<br>\n        - name: Nom de la station<br>\n        - lat: Latitude de la station<br>\n        - lon: Longitude de la station<br>\n        - capacity: Capacité de la station<br>\n        - num_bikes_available: Nombre de vélos disponibles<br>\n        - num_bikes_available_types: Nombre de vélos disponibles par type (mécanique, électrique)<br>\n        - num_docks_available: Nombre de places disponibles<br>\n        - is_installed: Installation de la station (voir dans la fonction getStationsStatus)<br>\n        - is_returning: Recevoir des vélos dans la station (voir dans la fonction getStationsStatus)<br>\n        - is_renting: Location de la station (voir dans la fonction getStationsStatus)<br>\n        - last_reported: Timestamp de la dernière mise à jour de la station\n        "
+      operationId: getStationStatusById
       parameters:
         -
           name: id
           in: path
+          description: 'ID de la station'
           required: true
           schema:
             type: integer
       responses:
         '200':
-          description: 'Status d une station'
+          description: 'Station status est récupéré avec succès'
+          content:
+            application/json:
+              examples:
+                /api/station/17278902806/status:
+                  summary: /api/station/17278902806/status
+                  value: { station_id: 17278902806, stationCode: 44015, name: 'Rouget de L isle - Watteau', lat: '48.778192750803', lon: '2.3963020229163', capacity: 20, num_bikes_available: 4, num_bikes_available_types: '[{"mechanical":0},{"ebike":4}]', num_docks_available: 16, is_installed: 1, is_returning: 1, is_renting: 1, last_reported: 1724180445 }
   /api/stations:
     get:
-      operationId: b28855f9a0f755f01567d1fb013b74ea
+      description: "Récupérer une liste des informations des stations<br>\n        La description des champs:<br>\n        - station_id: ID de la station<br>\n        - stationCode: Code de la station<br>\n        - name: Nom de la station<br>\n        - lat: Latitude de la station<br>\n        - lon: Longitude de la station<br>\n        - capacity: Capacité de la station<br>\n        "
+      operationId: getStations
       responses:
         '200':
-          description: 'Liste des stations'
+          description: 'Liste des informations des stations sont transmises'
+          content:
+            application/json:
+              examples:
+                /api/stations:
+                  summary: /api/stations
+                  value: [{ station_id: 213688169, stationCode: '16107', name: 'Benjamin Godard - Victor Hugo', lat: 48.865983, lon: 2.275725, capacity: 35 }, { station_id: 36255, stationCode: '9020', name: 'Toudouze - Clauzel', lat: 48.879295917335, lon: 2.3373600840569, capacity: 21 }]
   /api/stations/status:
     get:
-      operationId: e3c3f3783a3d3afe64f892666af66315
+      summary: getStationsStatus
+      description: "Liste des status des stations, voici la structure de données\n        <ul>\n            <li>station_id : numéro unique d’identification de la station. Ce numéro identifie la station au sein du service Vélib’ Métropole</li>\n            <li>is_installed : variable binaire indiquant si la station est. La station a déjà été déployée (1) ou est encore en cours de déploiement (0)</li>\n            <li>is_renting : variable binaire indiquant si la station peut louer des vélos (is_renting=1 si le statut de la station est Operative)</li>\n            <li>is_returning : variable binaire indiquant si la station peut recevoir des vélos (is_renting=1 si le statut de la station est Operative)</li>\n            <li>last_reported : date de la dernière mise-à-jour</li>\n            <li>numBikesAvailable : nombre de vélos disponibles</li>\n            <li>numDocksAvailable : nombre de bornettes disponibles</li>\n            <li>num_bikes_available : nombre de vélos disponibles</li>\n            <li>num_bikes_available_types : nombre de vélos disponibles avec distinctions entre Vélib’ mécanique et électrique</li>\n        </ul>"
+      operationId: getStationsStatus
       responses:
         '200':
-          description: 'Liste des status des stations'
+          description: 'Liste des status des stations sont transmis'
+          content:
+            application/json:
+              examples:
+                /api/stations/status:
+                  summary: /api/stations/status
+                  value: [{ station_id: '213688169', num_bikes_available: 7, num_bikes_available_types: { mechanical: 7, ebike: 0 }, num_docks_available: 16, is_installed: 1, is_returning: 1, is_renting: 1, last_reported: 1633669200 }, { station_id: '17278902806', num_bikes_available: 4, num_bikes_available_types: { mechanical: 2, ebike: 2 }, num_docks_available: 15, is_installed: 1, is_returning: 1, is_renting: 1, last_reported: 1724180746 }]
