@@ -1,4 +1,4 @@
-FROM php:8.2-apache
+FROM php:8.2-rc-apache
 
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 RUN rm /etc/apache2/sites-enabled/000-default.conf
@@ -8,9 +8,9 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
      locales \
      apt-utils \
-     git \
      libicu-dev \
      g++ \
+     git \
      libpng-dev \
      libxml2-dev \
      libzip-dev \
@@ -50,3 +50,9 @@ RUN cd mock-veliko-api && cp .env.example .env
 RUN chmod 777 -R /var/www/mock-veliko-api
 RUN chown -R www-data:www-data /var/www/mock-veliko-api
 RUN service apache2 restart
+
+# Suppression de GIT
+RUN apt-get purge -y git
+
+# Clean up any remaining Git directories and files
+RUN rm -rf /usr/local/git /usr/local/bin/git /usr/local/share/git-core /usr/share/doc/git /usr/share/man/man1/git*
