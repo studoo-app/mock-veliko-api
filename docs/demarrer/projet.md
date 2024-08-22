@@ -25,7 +25,7 @@ Lancez la commande suivante à la racine de votre projet :
 docker compose up -d
 ```
 
-Le mock API est accessible à l'adresse suivante : [http://localhost:9042/doc](http://localhost:9042/doc)
+Le mock API est accessible à l'adresse suivante : [http://localhost:9042/doc](http://localhost:9042/doc){:target="_blank"}
 
 <figure markdown="span">
   ![API docs](../assets/api-doc.png)

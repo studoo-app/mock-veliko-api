@@ -2,5 +2,6 @@
 * [Démarrer](demarrer/index.md)
     * [En local](demarrer/local.md)
     * [Dans un projet](demarrer/projet.md)
+* [Doc API](doc/index.md)
 * [Personnaliser](boost/index.md)
 * [Changelog](changelog.md)

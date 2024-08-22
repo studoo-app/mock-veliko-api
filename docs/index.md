@@ -18,4 +18,4 @@ L'API Velib est une API REST qui permet de récupérer des informations sur les 
 
 !!! warning "Information importante"
 
-    Voici le lien de l'API officielle : [https://www.velib-metropole.fr/donnees-open-data-gbfs-du-service-velib-metropole](https://www.velib-metropole.fr/donnees-open-data-gbfs-du-service-velib-metropole)
+    Voici le lien de l'API officielle : [https://www.velib-metropole.fr/donnees-open-data-gbfs-du-service-velib-metropole](https://www.velib-metropole.fr/donnees-open-data-gbfs-du-service-velib-metropole){:target="_blank"}

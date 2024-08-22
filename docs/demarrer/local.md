@@ -12,7 +12,7 @@ Lancer le mock API :
 docker run -p 9042:80 bfoujols/mock-veliko-api:latest
 ```
 
-Le mock API est accessible à l'adresse suivante : [http://localhost:9042/doc](http://localhost:9042/doc)
+Le mock API est accessible à l'adresse suivante : [http://localhost:9042/doc](http://localhost:9042/doc){:target="_blank"}
 
 <figure markdown="span">
   ![API docs](../assets/api-doc.png)

@@ -6,9 +6,9 @@
 
 **new features**
 
-- [#7](https://github.com/studoo-app/mock-veliko-api/issues/7) Création du route pour init structure des données @bfoujols
-- [#6](https://github.com/studoo-app/mock-veliko-api/issues/6) Add les vélos dans la station @bfoujols
-- [#6](https://github.com/studoo-app/mock-veliko-api/issues/6) Add la liste des vélos dans la parc Velib @bfoujols
+- [#7](https://github.com/studoo-app/mock-veliko-api/issues/7){:target="_blank"} Création du route pour init structure des données @bfoujols
+- [#6](https://github.com/studoo-app/mock-veliko-api/issues/6){:target="_blank"} Add les vélos dans la station @bfoujols
+- [#6](https://github.com/studoo-app/mock-veliko-api/issues/6){:target="_blank"} Add la liste des vélos dans la parc Velib @bfoujols
 
 **bug Fixes**
 
@@ -21,10 +21,10 @@
 
 **new features**
 
-- [#2](https://github.com/studoo-app/mock-veliko-api/issues/2) À partir du nom d'une route, reconstruire URL getNameToPath() @bfoujols
-- [#3](https://github.com/studoo-app/mock-veliko-api/issues/3) Add OpenAPI avec Redocly @bfoujols
-- [#5](https://github.com/studoo-app/mock-veliko-api/issues/5) Initialisation des données sur l'api officiel Velib @bfoujols
-- [#3](https://github.com/studoo-app/mock-veliko-api/issues/3) Add docker image https://hub.docker.com/repository/docker/bfoujols/mock-veliko-api @bfoujols
+- [#2](https://github.com/studoo-app/mock-veliko-api/issues/2){:target="_blank"} À partir du nom d'une route, reconstruire URL getNameToPath() @bfoujols
+- [#3](https://github.com/studoo-app/mock-veliko-api/issues/3){:target="_blank"} Add OpenAPI avec Redocly @bfoujols
+- [#5](https://github.com/studoo-app/mock-veliko-api/issues/5){:target="_blank"} Initialisation des données sur l'api officiel Velib @bfoujols
+- [#3](https://github.com/studoo-app/mock-veliko-api/issues/3){:target="_blank"} Add docker image [https://hub.docker.com/repository/docker/bfoujols/mock-veliko-api](https://hub.docker.com/repository/docker/bfoujols/mock-veliko-api){:target="_blank"} @bfoujols
 
 <br>
 
