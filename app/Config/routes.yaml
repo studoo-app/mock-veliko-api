@@ -30,6 +30,10 @@ getVelos:
     uri: /api/velos
     controller: Controller\api\Velo\VeloController
     httpMethod: [GET]
+getVeloById:
+    uri: /api/velo/{id}
+    controller: Controller\api\Velo\VeloByIdController
+    httpMethod: [GET]
 home:
     uri: /
     controller: Controller\HomeController

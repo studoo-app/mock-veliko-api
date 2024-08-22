@@ -48,6 +48,20 @@ class VeloRepository
 
 
     /**
+     * Récupérer le velo par son id
+     * @param int $id
+     * @return array
+     */
+    public function getVeloById(int $velo_id): array
+    {
+        $stmt = $this->db->prepare('SELECT * FROM velo WHERE velo_id = :velo_id');
+        $stmt->execute([
+            ':velo_id' => $velo_id
+        ]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
      * Récupérer tous les velos
      * @return array
      */

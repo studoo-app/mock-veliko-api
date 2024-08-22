@@ -8,7 +8,7 @@ info:
   license:
     name: MIT
     url: 'https://opensource.org/licenses/MIT'
-  version: '0.2'
+  version: '0.3'
 servers:
   -
     url: 'http://localhost:8042'
@@ -136,6 +136,28 @@ paths:
                 /api/stations/status:
                   summary: /api/stations/status
                   value: [{ station_id: '213688169', num_bikes_available: 7, num_bikes_available_types: { mechanical: 7, ebike: 0 }, num_docks_available: 16, is_installed: 1, is_returning: 1, is_renting: 1, last_reported: 1633669200 }, { station_id: '17278902806', num_bikes_available: 4, num_bikes_available_types: { mechanical: 2, ebike: 2 }, num_docks_available: 15, is_installed: 1, is_returning: 1, is_renting: 1, last_reported: 1724180746 }]
+  '/api/velo/{id}':
+    get:
+      summary: getVeloById
+      description: "Information du vélos, voici la structure de données\n        <ul>\n            <li>velo_id : numéro unique d’identification du vélo.</li>\n            <li>type : variable texte indiquant si le vélo est : mécanique (\"mechanical\") ou électrique (\"ebike\")</li>\n            <li>status : variable texte indiquant si le vélo est : opérationnel (\"available\"), en anomalie (\"fail\") ou en cours de réparation (\"repair\")</li>\n            <li>num_km_total : Nombre de kilometre</li>\n            <li>station_id_available : ID station rattaché en moment et au départ</li>\n        </ul>"
+      operationId: getVeloById
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID du vélo'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'L information du vélos sont transmis'
+          content:
+            application/json:
+              examples:
+                /api/velo/245671:
+                  summary: /api/velo/245671
+                  value: { velo_id: 245671, type: mechanical, status: available, num_km_total: 234, station_id_available: 17278902806 }
   /api/velos:
     get:
       summary: getVelos
