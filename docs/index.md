@@ -1,7 +1,7 @@
 # Mock API Server pour le projet Veliko
 
 <figure markdown="span">
-  ![Logo Veliko](assets/veliko.svg){ width="500" }
+  ![Logo Veliko](assets/veliko.svg){ width="300" }
 </figure>
 
 ## Introduction

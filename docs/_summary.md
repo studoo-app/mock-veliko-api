@@ -1,3 +1,6 @@
-* [Veliko](index.md)
+* [Mock API Veliko](index.md)
 * [Démarrer](demarrer/index.md)
+    * [En local](demarrer/local.md)
+    * [Dans un projet](demarrer/projet.md)
+* [Personnaliser](boost/index.md)
 * [Changelog](changelog.md)
