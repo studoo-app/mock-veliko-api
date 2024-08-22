@@ -1,22 +1,54 @@
 openapi: 3.0.0
 info:
   title: 'API VELIKO'
-  version: '0.1'
+  description: 'API VELIKO est une API de gestion des stations de vélos en libre service'
+  contact:
+    name: 'Benoit Foujols'
+    email: Benoit.Foujols@ac-creteil.fr
+  license:
+    name: MIT
+    url: 'https://opensource.org/licenses/MIT'
+  version: '0.2'
+servers:
+  -
+    url: 'http://localhost:8042'
 paths:
-  /api/init:
+  /api/init/data:
     get:
-      summary: initAPI
+      summary: initApiData
       description: "Initialisation de l'API VELIKO se fait au dédut projet. Elle permet de récupérer les données des stations et des status des stations sur API officielle de VELIB"
-      operationId: initApi
+      operationId: initApiData
       responses:
         '200':
           description: "Initialisation de l'API VELIKO est excutée avec succès"
           content:
             application/json:
               examples:
-                /api/init:
-                  summary: /api/init
+                /api/init/data:
+                  summary: /api/init/data
                   value: { status: success, message: 'API VELIKO is running' }
+        '500':
+          description: 'Erreur interne du serveur'
+          content:
+            application/json:
+              examples:
+                error:
+                  summary: 'Erreur interne'
+                  value: { status: error, message: 'Une erreur interne est survenue, veuillez regarder les logs serveur' }
+  /api/init/schema:
+    get:
+      summary: initApiSchema
+      description: "Initialisation de la scruture de la base de données de l'API VELIKO se fait au dédut projet. Elle permet de créer les tables de la base de données"
+      operationId: initApiSchema
+      responses:
+        '200':
+          description: "Initialisation de la structure de l'API VELIKO est excutée avec succès"
+          content:
+            application/json:
+              examples:
+                /api/init/schema:
+                  summary: /api/init/schema
+                  value: { status: success, message: 'Structure API VELIKO is done' }
         '500':
           description: 'Erreur interne du serveur'
           content:
@@ -46,9 +78,9 @@ paths:
                 /api/station/213688169:
                   summary: /api/station/213688169
                   value: { station_id: 213688169, stationCode: '16107', name: 'Benjamin Godard - Victor Hugo', lat: 48.865983, lon: 2.275725, capacity: 35 }
-  '/api/station/{id}/status':
+  '/api/station/{id}/status[/{optional}]':
     get:
-      description: "Récupérer le status d une station par son ID (station_id)<br>\n        Statut d une station dans son état actuel, celle-ci à une timestamp de dernière mise à jour (last_reported).<br>\n        La description des champs:<br>\n        - station_id: ID de la station<br>\n        - stationCode: Code de la station<br>\n        - name: Nom de la station<br>\n        - lat: Latitude de la station<br>\n        - lon: Longitude de la station<br>\n        - capacity: Capacité de la station<br>\n        - num_bikes_available: Nombre de vélos disponibles<br>\n        - num_bikes_available_types: Nombre de vélos disponibles par type (mécanique, électrique)<br>\n        - num_docks_available: Nombre de places disponibles<br>\n        - is_installed: Installation de la station (voir dans la fonction getStationsStatus)<br>\n        - is_returning: Recevoir des vélos dans la station (voir dans la fonction getStationsStatus)<br>\n        - is_renting: Location de la station (voir dans la fonction getStationsStatus)<br>\n        - last_reported: Timestamp de la dernière mise à jour de la station\n        "
+      description: "Récupérer le status d une station par son ID (station_id)<br>\n        Statut d une station dans son état actuel, celle-ci à une timestamp de dernière mise à jour (last_reported).<br>\n        La description des champs:<br>\n        - station_id: ID de la station<br>\n        - stationCode: Code de la station<br>\n        - name: Nom de la station<br>\n        - lat: Latitude de la station<br>\n        - lon: Longitude de la station<br>\n        - capacity: Capacité de la station<br>\n        - num_bikes_available: Nombre de vélos disponibles<br>\n        - num_bikes_available_types: Nombre de vélos disponibles par type (mécanique, électrique)<br>\n        - num_docks_available: Nombre de places disponibles<br>\n        - is_installed: Installation de la station (voir dans la fonction getStationsStatus)<br>\n        - is_returning: Recevoir des vélos dans la station (voir dans la fonction getStationsStatus)<br>\n        - is_renting: Location de la station (voir dans la fonction getStationsStatus)<br>\n        - last_reported: Timestamp de la dernière mise à jour de la station<br>\n        - bikes_available_types: Liste des vélos disponibles avec distinction entre Vélib’ mécanique et électrique (optionnel)<br>\n        Voir les exemples de reponse -> -> -><br>\n        "
       operationId: getStationStatusById
       parameters:
         -
@@ -58,6 +90,13 @@ paths:
           required: true
           schema:
             type: integer
+        -
+          name: optional
+          in: path
+          description: 'Element optionnel pour récupérer les vélos disponibles. Valeur possible: velo'
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: 'Station status est récupéré avec succès'
@@ -66,7 +105,10 @@ paths:
               examples:
                 /api/station/17278902806/status:
                   summary: /api/station/17278902806/status
-                  value: { station_id: 17278902806, stationCode: 44015, name: 'Rouget de L isle - Watteau', lat: '48.778192750803', lon: '2.3963020229163', capacity: 20, num_bikes_available: 4, num_bikes_available_types: '[{"mechanical":0},{"ebike":4}]', num_docks_available: 16, is_installed: 1, is_returning: 1, is_renting: 1, last_reported: 1724180445 }
+                  value: { station_id: 17278902806, stationCode: 44015, name: 'Rouget de L isle - Watteau', lat: '48.778192750803', lon: '2.3963020229163', capacity: 20, num_bikes_available: 4, num_bikes_available_types: '[{"mechanical":1},{"ebike":3}]', num_docks_available: 16, is_installed: 1, is_returning: 1, is_renting: 1, last_reported: 1724180445 }
+                /api/station/17278902806/status/velo:
+                  summary: /api/station/17278902806/status/velo
+                  value: { station_id: 17278902806, stationCode: 44015, name: 'Rouget de L isle - Watteau', lat: '48.778192750803', lon: '2.3963020229163', capacity: 20, num_bikes_available: 4, num_bikes_available_types: '[{"mechanical":1},{"ebike":2}]', num_docks_available: 16, is_installed: 1, is_returning: 1, is_renting: 1, last_reported: 1724180445, bikes_available_types: [{ velo_id: 245671, type: mechanical, status: available, num_km_total: 234, station_id_available: 17278902806 }, { velo_id: 37654, type: ebike, status: available, num_km_total: 345, station_id_available: 17278902806 }, { velo_id: 434, type: ebike, status: available, num_km_total: 457, station_id_available: 17278902806 }] }
   /api/stations:
     get:
       description: "Récupérer une liste des informations des stations<br>\n        La description des champs:<br>\n        - station_id: ID de la station<br>\n        - stationCode: Code de la station<br>\n        - name: Nom de la station<br>\n        - lat: Latitude de la station<br>\n        - lon: Longitude de la station<br>\n        - capacity: Capacité de la station<br>\n        "
@@ -94,3 +136,17 @@ paths:
                 /api/stations/status:
                   summary: /api/stations/status
                   value: [{ station_id: '213688169', num_bikes_available: 7, num_bikes_available_types: { mechanical: 7, ebike: 0 }, num_docks_available: 16, is_installed: 1, is_returning: 1, is_renting: 1, last_reported: 1633669200 }, { station_id: '17278902806', num_bikes_available: 4, num_bikes_available_types: { mechanical: 2, ebike: 2 }, num_docks_available: 15, is_installed: 1, is_returning: 1, is_renting: 1, last_reported: 1724180746 }]
+  /api/velos:
+    get:
+      summary: getVelos
+      description: "Liste des vélos, voici la structure de données\n        <ul>\n            <li>velo_id : numéro unique d’identification du vélo.</li>\n            <li>type : variable texte indiquant si le vélo est : mécanique (\"mechanical\") ou électrique (\"ebike\")</li>\n            <li>status : variable texte indiquant si le vélo est : opérationnel (\"available\"), en anomalie (\"fail\") ou en cours de réparation (\"repair\")</li>\n            <li>num_km_total : Nombre de kilometre</li>\n            <li>station_id_available : ID station rattaché en moment et au départ</li>\n        </ul>"
+      operationId: getVelos
+      responses:
+        '200':
+          description: 'Liste des vélos sont transmis'
+          content:
+            application/json:
+              examples:
+                /api/velos:
+                  summary: /api/velos
+                  value: [{ velo_id: 245671, type: mechanical, status: available, num_km_total: 234, station_id_available: 17278902806 }, { velo_id: 434, type: ebike, status: available, num_km_total: 457, station_id_available: 17278902806 }]

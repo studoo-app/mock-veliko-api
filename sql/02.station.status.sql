@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS station_status;
 create table station_status
 (
     station_id                integer not null

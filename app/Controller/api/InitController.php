@@ -5,15 +5,16 @@ namespace Controller\api;
 use OpenApi\Attributes;
 use Repository\StationRepository;
 use Repository\StationStatusRepository;
+use Repository\VeloRepository;
 use Studoo\EduFramework\Core\Controller\ControllerInterface;
 use Studoo\EduFramework\Core\Controller\Request;
 
 class InitController implements ControllerInterface
 {
     #[Attributes\Get(
-        path: '/api/init',
-        operationId: 'initApi',
-        summary: 'initAPI',
+        path: '/api/init/data',
+        operationId: 'initApiData',
+        summary: 'initApiData',
         description: 'Initialisation de l\'API VELIKO se fait au dédut projet. Elle permet de récupérer les données des stations et des status des stations sur API officielle de VELIB',
     )]
     #[Attributes\Response(
@@ -23,8 +24,8 @@ class InitController implements ControllerInterface
             mediaType: 'application/json',
             examples: [
                 new Attributes\Examples(
-                    example: '/api/init',
-                    summary: '/api/init',
+                    example: '/api/init/data',
+                    summary: '/api/init/data',
                     value: [
                         'status' => 'success',
                         'message' => 'API VELIKO is running'
@@ -57,6 +58,7 @@ class InitController implements ControllerInterface
         try {
             (new StationRepository())->truncateTable();
             (new StationStatusRepository())->truncateTable();
+            (new VeloRepository())->truncateTable();
 
             // Fetch data on station_information
             $apiUrlStation = 'https://velib-metropole-opendata.smovengo.cloud/opendata/Velib_Metropole/station_information.json';
@@ -80,6 +82,20 @@ class InitController implements ControllerInterface
 
             foreach ($dataStatus["data"]["stations"] as $item) {
                 (new StationStatusRepository())->insert($item);
+                if (is_array($item["num_bikes_available_types"])) {
+                    foreach ($item["num_bikes_available_types"] as $itemAvailable) {
+                        foreach ($itemAvailable as $type => $nbBikeAvailable) {
+                            for ($i = 0; $i < $nbBikeAvailable; $i++) {
+                                (new VeloRepository())->insert([
+                                    "type" => $type,
+                                    "status" => "available",
+                                    "num_km_total" => random_int(0, 1000),
+                                    "station_id_available" => $item["station_id"]
+                                ]);
+                            }
+                        }
+                    }
+                }
             }
 
             $listTest = [

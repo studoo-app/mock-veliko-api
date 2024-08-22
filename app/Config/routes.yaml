@@ -1,6 +1,10 @@
-initApi:
-    uri: /api/init
+initApiData:
+    uri: /api/init/data
     controller: Controller\api\InitController
+    httpMethod: [GET]
+initApiSchema:
+    uri: /api/init/schema
+    controller: Controller\api\SchemaController
     httpMethod: [GET]
 doc:
     uri: /doc
@@ -15,10 +19,14 @@ getStationById:
     controller: Controller\api\Station\StationIdController
     httpMethod: [GET]
 getStationStatusById:
-    uri: '/api/station/{id}/status'
+    uri: '/api/station/{id}/status[/{optional}]'
     controller: Controller\api\Station\StationStatusIdController
     httpMethod: [GET]
 getStationsStatus:
     uri: /api/stations/status
     controller: Controller\api\Status\StationsStatusController
+    httpMethod: [GET]
+getVelos:
+    uri: /api/velos
+    controller: Controller\api\Velo\VeloController
     httpMethod: [GET]
