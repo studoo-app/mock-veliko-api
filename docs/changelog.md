@@ -28,6 +28,6 @@
 
 <br>
 
-## Starting alpha API - 03/08/2024
+## alpha - 03/08/2024
 
 Début du projet mock veliko

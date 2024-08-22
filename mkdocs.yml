@@ -1,6 +1,6 @@
 site_name: Mock API Veliko
-site_url: https://studoo-app.github.io/mock-api-veliko/
-repo_url: https://github.com/studoo-app/mock-api-veliko
+site_url: https://studoo-app.github.io/mock-veliko-api/
+repo_url: https://github.com/studoo-app/mock-veliko-api
 copyright: 'Copyright © 2022 - 2024 Collectif Studoo'
 edit_uri: edit/main/docs/
 
@@ -62,56 +62,56 @@ theme:
     - content.code.select
   language: fr
 
-  extra:
-    version:
-      default: stable
-    social:
-      - icon: fontawesome/brands/github
-        link: https://github.com/studoo-app
-      - icon: fontawesome/brands/docker
-        link: https://www.docker.com
-      - icon: fontawesome/brands/php
-        link: https://php.net
-    generator: false
+extra:
+  version:
+    default: stable
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/studoo-app
+    - icon: fontawesome/brands/docker
+      link: https://www.docker.com
+    - icon: fontawesome/brands/php
+      link: https://php.net
+  generator: false
 
-  markdown_extensions:
-    - admonition
-    - tables
-    - toc:
-        permalink: true
-    - pymdownx.details
-    - pymdownx.superfences
-    - def_list
-    - pymdownx.tasklist:
-        clickable_checkbox: true
-    - pymdownx.tabbed:
-        alternate_style: true
-    - pymdownx.emoji:
-        emoji_index: !!python/name:material.extensions.emoji.twemoji
-        emoji_generator: !!python/name:material.extensions.emoji.to_svg
-    - pymdownx.critic
-    - pymdownx.caret
-    - pymdownx.keys
-    - pymdownx.mark
-    - pymdownx.highlight:
-        anchor_linenums: true
-        line_spans: __span
-        pygments_lang_class: true
-    - pymdownx.inlinehilite
-    - pymdownx.snippets
-    - attr_list
-    - md_in_html
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - def_list
+  - pymdownx.tasklist:
+      clickable_checkbox: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - attr_list
+  - md_in_html
 
-  plugins:
-    - offline
-    - search
-    - literate-nav:
-        nav_file: _summary.md
-    - git-committers:
-        repository: studoo-app/mock-api-veliko
-        branch: main
-    - git-revision-date-localized:
-        enable_creation_date: true
+plugins:
+  - offline
+  - search
+  - literate-nav:
+      nav_file: _summary.md
+  - git-committers:
+      repository: studoo-app/mock-veliko-api
+      branch: main
+  - git-revision-date-localized:
+      enable_creation_date: true
 
 extra_css:
   - stylesheets/extra.css
