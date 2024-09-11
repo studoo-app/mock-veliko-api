@@ -13,11 +13,6 @@ class InitCommand extends \Studoo\EduFramework\Commands\Extends\CommandManage
 {
 	public function execute(InputInterface $input, OutputInterface $output): int
 	{
-		self::$stdOutput->writeln([
-		        CommandBanner::getBanner(),
-		        'Bienvenue dans la console ' . ConfigCore::getConfig('name'),
-		        '',
-		    ]);
 
             (new \Core\InitApi())->getStructure();
             (new \Core\InitApi())->getData();
