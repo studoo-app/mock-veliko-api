@@ -19,3 +19,10 @@ function install(): void
     run('docker pull redocly/cli');
     run('composer install');
 }
+
+
+#[AsTask(name: 'doc:start:serv', description: 'Démarrage du serveur de documentation')]
+function doc_server_start(): void
+{
+    run('source venv/bin/activate && mkdocs serve');
+}

@@ -2,7 +2,7 @@
 
 **Présentation des versions du mock veliko**
 
-## v2.2.0 - 22/08/2024
+## v0.2.0 - 22/08/2024
 
 **new features**
 
@@ -17,7 +17,7 @@
 
 <br>
 
-## v2.1.0 - 21/08/2024
+## v0.1.0 - 21/08/2024
 
 **new features**
 
