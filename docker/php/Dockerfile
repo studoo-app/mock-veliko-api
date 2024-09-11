@@ -18,7 +18,8 @@ RUN apt-get update \
      libxslt-dev \
      libssh-dev \
      sqlite3 \
-     libsqlite3-dev
+     libsqlite3-dev \
+     curl
 
 RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen && \
@@ -52,12 +53,14 @@ RUN chmod 777 -R /var/www/mock-veliko-api
 RUN chown -R www-data:www-data /var/www/mock-veliko-api
 RUN service apache2 restart
 
-# init project
-RUN curl --request GET --url http://localhost:80/api/init/schema
-RUN curl --request GET --url http://localhost:80/api/init/data
-
 # Suppression de GIT
 RUN apt-get purge -y git
 
 # Clean up any remaining Git directories and files
 RUN rm -rf /usr/local/git /usr/local/bin/git /usr/local/share/git-core /usr/share/doc/git /usr/share/man/man1/git*
+
+# init project
+RUN service apache2 start
+RUN sleep 10
+RUN curl --request GET --url http://localhost:80/api/init/schema
+RUN curl --request GET --url http://localhost:80/api/init/data
