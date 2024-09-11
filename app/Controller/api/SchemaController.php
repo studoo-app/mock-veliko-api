@@ -54,20 +54,7 @@ class SchemaController implements ControllerInterface
         header('Content-Type: application/json');
 
         try {
-
-            $sql01Station = file_get_contents(__DIR__ . '/../../../sql/01.station.sql');
-            $sql02StationStatus = file_get_contents(__DIR__ . '/../../../sql/02.station.status.sql');
-            $sql03Velo = file_get_contents(__DIR__ . '/../../../sql/03.velo.sql');
-
-            $db = (new DatabaseSqlite())->getManager();
-            $db->exec($sql01Station);
-            $db->exec($sql02StationStatus);
-            $db->exec($sql03Velo);
-
-            $listTest = [
-                "status" => "success",
-                "message" => "Structure API VELIKO is done"
-            ];
+            $listTest = (new \Core\InitApi())->getStructure();
         } catch (\Exception $e) {
             http_response_code(500);
             $errorResponse = [

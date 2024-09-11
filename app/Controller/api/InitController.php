@@ -3,9 +3,6 @@
 namespace Controller\api;
 
 use OpenApi\Attributes;
-use Repository\StationRepository;
-use Repository\StationStatusRepository;
-use Repository\VeloRepository;
 use Studoo\EduFramework\Core\Controller\ControllerInterface;
 use Studoo\EduFramework\Core\Controller\Request;
 
@@ -56,52 +53,7 @@ class InitController implements ControllerInterface
         header('Content-Type: application/json');
 
         try {
-            (new StationRepository())->truncateTable();
-            (new StationStatusRepository())->truncateTable();
-            (new VeloRepository())->truncateTable();
-
-            // Fetch data on station_information
-            $apiUrlStation = 'https://velib-metropole-opendata.smovengo.cloud/opendata/Velib_Metropole/station_information.json';
-            $jsonDataStation = file_get_contents($apiUrlStation);
-            if ($jsonDataStation === false) {
-                new \Exception("Error fetching data from API VELIB (station_information.json)");
-            }
-            $dataStation = json_decode($jsonDataStation, true);
-
-            foreach ($dataStation["data"]["stations"] as $item) {
-                (new StationRepository())->insert($item);
-            }
-
-            // Fetch data on station_status
-            $apiUrlStatus = 'https://velib-metropole-opendata.smovengo.cloud/opendata/Velib_Metropole/station_status.json';
-            $jsonDataStatus = file_get_contents($apiUrlStatus);
-            if ($jsonDataStatus === false) {
-                new \Exception("Error fetching data from API VELIB (station_status.json)");
-            }
-            $dataStatus = json_decode($jsonDataStatus, true);
-
-            foreach ($dataStatus["data"]["stations"] as $item) {
-                (new StationStatusRepository())->insert($item);
-                if (is_array($item["num_bikes_available_types"])) {
-                    foreach ($item["num_bikes_available_types"] as $itemAvailable) {
-                        foreach ($itemAvailable as $type => $nbBikeAvailable) {
-                            for ($i = 0; $i < $nbBikeAvailable; $i++) {
-                                (new VeloRepository())->insert([
-                                    "type" => $type,
-                                    "status" => "available",
-                                    "num_km_total" => random_int(0, 1000),
-                                    "station_id_available" => $item["station_id"]
-                                ]);
-                            }
-                        }
-                    }
-                }
-            }
-
-            $listTest = [
-                "status" => "success",
-                "message" => "API VELIKO is running"
-            ];
+            $listTest = (new \Core\InitApi())->getData();
         } catch (\Exception $e) {
             http_response_code(500);
             $errorResponse = [

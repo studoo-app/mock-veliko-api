@@ -57,10 +57,7 @@ RUN service apache2 restart
 RUN apt-get purge -y git
 
 # Clean up any remaining Git directories and files
-RUN rm -rf /usr/local/git /usr/local/bin/git /usr/local/share/git-core /usr/share/doc/git /usr/share/man/man1/git*
+RUN rm -rf /usr/local/git /usr/local/bin/git /usr/local/share/git-Core /usr/share/doc/git /usr/share/man/man1/git*
 
-# init project
-RUN service apache2 start
-RUN sleep 10
-RUN curl --request GET --url http://localhost:80/api/init/schema
-RUN curl --request GET --url http://localhost:80/api/init/data
+# init
+RUN php bin/edu init
