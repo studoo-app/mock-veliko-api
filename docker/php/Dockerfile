@@ -60,4 +60,4 @@ RUN apt-get purge -y git
 RUN rm -rf /usr/local/git /usr/local/bin/git /usr/local/share/git-Core /usr/share/doc/git /usr/share/man/man1/git*
 
 # CLI command init
-RUN cd mock-veliko-api && php bin/edu init
+# RUN cd mock-veliko-api && php bin/edu init
