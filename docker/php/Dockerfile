@@ -52,6 +52,10 @@ RUN chmod 777 -R /var/www/mock-veliko-api
 RUN chown -R www-data:www-data /var/www/mock-veliko-api
 RUN service apache2 restart
 
+# init project
+RUN curl --request GET --url http://localhost:80/api/init/schema
+RUN curl --request GET --url http://localhost:80/api/init/data
+
 # Suppression de GIT
 RUN apt-get purge -y git
 
