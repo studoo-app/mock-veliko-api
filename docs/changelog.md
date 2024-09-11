@@ -2,6 +2,17 @@
 
 **Présentation des versions du mock veliko**
 
+## v0.2.1 - 11/09/2024
+
+- New page d'accueil @bfoujols
+- New command CLI pour lancer l'initialisation des données @bfoujols
+- Refactoring de la gestion des données @bfoujols
+
+**bug Fixes**
+
+- [#9](https://github.com/studoo-app/mock-veliko-api/issues/9) Fix sur la gestion du timout de l'initialisation des données @bfoujols
+
+
 ## v0.2.0 - 22/08/2024
 
 **new features**
