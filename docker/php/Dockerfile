@@ -34,6 +34,7 @@ RUN echo "Installation et configuration des extensions"
 RUN docker-php-ext-configure intl
 RUN docker-php-ext-install pdo pdo_mysql pdo_sqlite gd opcache intl zip calendar dom mbstring zip gd xsl
 RUN pecl install apcu xdebug && docker-php-ext-enable apcu xdebug
+RUN echo "max_execution_time = 0" >> /usr/local/etc/php/conf.d/custom.ini
 
 #Ouverture des droits de lecture, modification et execution
 RUN echo "Ouverture des droits de lecture, modification et execution"
