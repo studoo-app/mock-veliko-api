@@ -59,5 +59,5 @@ RUN apt-get purge -y git
 # Clean up any remaining Git directories and files
 RUN rm -rf /usr/local/git /usr/local/bin/git /usr/local/share/git-Core /usr/share/doc/git /usr/share/man/man1/git*
 
-# init
-RUN php bin/edu init
+# CLI command init
+RUN cd mock-veliko-api && php bin/edu init
