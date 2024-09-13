@@ -8,7 +8,7 @@ info:
   license:
     name: MIT
     url: 'https://opensource.org/licenses/MIT'
-  version: 0.2.1
+  version: 0.3.0
 servers:
   -
     url: 'http://localhost:8042'
@@ -172,3 +172,25 @@ paths:
                 /api/velos:
                   summary: /api/velos
                   value: [{ velo_id: 245671, type: mechanical, status: available, num_km_total: 234, station_id_available: 17278902806 }, { velo_id: 434, type: ebike, status: available, num_km_total: 457, station_id_available: 17278902806 }]
+  '/api/velo/{id}/location':
+    put:
+      summary: getVeloLocById
+      description: 'Location du vélo via son ID, Cette méthode permet de retirer le Vélo de la station'
+      operationId: getVeloLocById
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID du vélo'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'L information du vélos sont transmis'
+          content:
+            application/json:
+              examples:
+                /api/velo/245671/location:
+                  summary: /api/velo/245671/location
+                  value: { velo_id: 245671, type: mechanical, status: location, num_km_total: 234, station_id_available: 17278902806 }

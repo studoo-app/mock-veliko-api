@@ -36,6 +36,24 @@ class VeloRepository
     }
 
     /**
+     * Mettre à jour un velo par son id
+     *
+     * @param array $item
+     * @return void
+     */
+    public function update(array $item): void
+    {
+        $stmt = $this->db->prepare('UPDATE Velo SET status = :status, num_km_total = :num_km_total, station_id_available = :station_id_available WHERE velo_id = :velo_id');
+
+        $stmt->execute([
+            ':velo_id' => $item['velo_id'],
+            ':status' => $item['status'],
+            ':num_km_total' => $item['num_km_total'],
+            ':station_id_available' => $item['station_id_available']
+        ]);
+    }
+
+    /**
      * Récupérer tous les velos
      * @return array
      */
@@ -58,7 +76,7 @@ class VeloRepository
         $stmt->execute([
             ':velo_id' => $velo_id
         ]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     /**
