@@ -14,6 +14,7 @@ class VeloLocByIdController implements ControllerInterface
         operationId: 'getVeloLocById',
         summary: 'getVeloLocById',
         description: 'Location du vélo via son ID, Cette méthode permet de retirer le Vélo de la station',
+        security: [['HeaderAuthorization' => []]]
     )]
     #[Attributes\Parameter(
         name: 'id',

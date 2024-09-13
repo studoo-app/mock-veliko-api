@@ -139,7 +139,7 @@ paths:
   '/api/velo/{id}':
     get:
       summary: getVeloById
-      description: "Information du vélos, voici la structure de données\n        <ul>\n            <li>velo_id : numéro unique d’identification du vélo.</li>\n            <li>type : variable texte indiquant si le vélo est : mécanique (\"mechanical\") ou électrique (\"ebike\")</li>\n            <li>status : variable texte indiquant si le vélo est : opérationnel (\"available\"), en anomalie (\"fail\") ou en cours de réparation (\"repair\")</li>\n            <li>num_km_total : Nombre de kilometre</li>\n            <li>station_id_available : ID station rattaché en moment et au départ</li>\n        </ul>"
+      description: "Information du vélos, voici la structure de données\n        <ul>\n            <li>velo_id : numéro unique d’identification du vélo.</li>\n            <li>type : variable texte indiquant si le vélo est : mécanique (\"mechanical\") ou électrique (\"ebike\")</li>\n            <li>status : variable texte indiquant si le vélo est : opérationnel (\"available\"), en cours de location (\"location\"), en anomalie (\"fail\") ou en cours de réparation (\"repair\")</li>\n            <li>num_km_total : Nombre de kilometre</li>\n            <li>station_id_available : ID station rattaché en moment et au départ</li>\n        </ul>"
       operationId: getVeloById
       parameters:
         -
@@ -161,7 +161,7 @@ paths:
   /api/velos:
     get:
       summary: getVelos
-      description: "Liste des vélos, voici la structure de données\n        <ul>\n            <li>velo_id : numéro unique d’identification du vélo.</li>\n            <li>type : variable texte indiquant si le vélo est : mécanique (\"mechanical\") ou électrique (\"ebike\")</li>\n            <li>status : variable texte indiquant si le vélo est : opérationnel (\"available\"), en anomalie (\"fail\") ou en cours de réparation (\"repair\")</li>\n            <li>num_km_total : Nombre de kilometre</li>\n            <li>station_id_available : ID station rattaché en moment et au départ</li>\n        </ul>"
+      description: "Liste des vélos, voici la structure de données\n        <ul>\n            <li>velo_id : numéro unique d’identification du vélo.</li>\n            <li>type : variable texte indiquant si le vélo est : mécanique (\"mechanical\") ou électrique (\"ebike\")</li>\n            <li>status : variable texte indiquant si le vélo est : opérationnel (\"available\"), en cours de location (\"location\"), en anomalie (\"fail\") ou en cours de réparation (\"repair\")</li>\n            <li>num_km_total : Nombre de kilometre</li>\n            <li>station_id_available : ID station rattaché en moment et au départ</li>\n        </ul>"
       operationId: getVelos
       responses:
         '200':
@@ -194,6 +194,9 @@ paths:
                 /api/velo/245671/location:
                   summary: /api/velo/245671/location
                   value: { velo_id: 245671, type: mechanical, status: location, num_km_total: 234, station_id_available: 17278902806 }
+      security:
+        -
+          HeaderAuthorization: []
   '/api/velo/{velo_id}/restore/{station_id}':
     put:
       summary: getVeloRestoreById
@@ -223,3 +226,14 @@ paths:
                 /api/velo/245671/restore/17278902806:
                   summary: /api/velo/245671/restore/17278902806
                   value: { velo_id: 245671, type: mechanical, status: available, num_km_total: 234, station_id_available: 17278902806 }
+      security:
+        -
+          HeaderAuthorization: []
+components:
+  securitySchemes:
+    HeaderAuthorization:
+      type: http
+      description: "Authorization : token \n    <br> (token par defaut: RG6F8do7ERFGsEgwkPEdW1Feyus0LXJ21E2EZRETTR65hN9DL8a3O8a)"
+      name: Authorization
+      in: header
+      scheme: header

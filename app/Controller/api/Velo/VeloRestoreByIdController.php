@@ -14,6 +14,7 @@ class VeloRestoreByIdController implements ControllerInterface
         operationId: 'getVeloRestoreById',
         summary: 'getVeloRestoreById',
         description: 'Restaurer le vélo loué via son ID, Cette méthode permet de rendre le Vélo loué dans une station',
+        security: [['HeaderAuthorization' => []]]
     )]
     #[Attributes\Parameter(
         name: 'velo_id',

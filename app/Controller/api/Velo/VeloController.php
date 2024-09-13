@@ -16,7 +16,7 @@ class VeloController implements ControllerInterface
         <ul>
             <li>velo_id : numéro unique d’identification du vélo.</li>
             <li>type : variable texte indiquant si le vélo est : mécanique ("mechanical") ou électrique ("ebike")</li>
-            <li>status : variable texte indiquant si le vélo est : opérationnel ("available"), en anomalie ("fail") ou en cours de réparation ("repair")</li>
+            <li>status : variable texte indiquant si le vélo est : opérationnel ("available"), en cours de location ("location"), en anomalie ("fail") ou en cours de réparation ("repair")</li>
             <li>num_km_total : Nombre de kilometre</li>
             <li>station_id_available : ID station rattaché en moment et au départ</li>
         </ul>',
