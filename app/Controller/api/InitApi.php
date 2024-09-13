@@ -1,13 +1,13 @@
 <?php
 
-namespace Core;
+namespace Controller\api;
 
 use Repository\StationRepository;
 use Repository\StationStatusRepository;
 use Repository\VeloRepository;
 use Studoo\EduFramework\Core\Service\DatabaseSqlite;
 
-class InitApi
+class    InitApi
 {
     public function getStructure(): array
     {

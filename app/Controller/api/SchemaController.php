@@ -5,7 +5,6 @@ namespace Controller\api;
 use OpenApi\Attributes;
 use Studoo\EduFramework\Core\Controller\ControllerInterface;
 use Studoo\EduFramework\Core\Controller\Request;
-use Studoo\EduFramework\Core\Service\DatabaseSqlite;
 
 class SchemaController implements ControllerInterface
 {
@@ -54,7 +53,7 @@ class SchemaController implements ControllerInterface
         header('Content-Type: application/json');
 
         try {
-            $listTest = (new \Core\InitApi())->getStructure();
+            $listTest = (new \Controller\api\InitApi())->getStructure();
         } catch (\Exception $e) {
             http_response_code(500);
             $errorResponse = [

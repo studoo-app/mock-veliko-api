@@ -53,7 +53,7 @@ class InitController implements ControllerInterface
         header('Content-Type: application/json');
 
         try {
-            $listTest = (new \Core\InitApi())->getData();
+            $listTest = (new \Controller\api\InitApi())->getData();
         } catch (\Exception $e) {
             http_response_code(500);
             $errorResponse = [
