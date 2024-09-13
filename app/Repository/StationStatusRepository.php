@@ -18,6 +18,8 @@ class StationStatusRepository
     }
 
     /**
+     * Inserer un status de station
+     *
      * @param array $item
      * @return void
      */
@@ -38,6 +40,40 @@ class StationStatusRepository
     }
 
     /**
+     * Mettre à jour un status de station par son id
+     *
+     * @param array $item
+     * @return void
+     */
+    public function update(array $item): void
+    {
+        $stmt = $this->db->prepare('UPDATE station_status SET num_bikes_available = :num_bikes_available, num_bikes_available_types = :num_bikes_available_types, num_docks_available = :num_docks_available, last_reported = :last_reported WHERE station_id = :station_id');
+
+        $stmt->execute([
+            ':station_id' => $item['station_id'],
+            ':num_bikes_available' => $item['num_bikes_available'],
+            ':num_bikes_available_types' => json_encode($item['num_bikes_available_types']),
+            ':num_docks_available' => $item['num_docks_available'],
+            ':last_reported' => $item['last_reported']
+        ]);
+    }
+
+    /**
+     * Récupérer un status de station par son id
+     *
+     * @param int $stationId
+     * @return array
+     */
+    public function getStationsStatusById(int $stationId): array
+    {
+        $stmt = $this->db->prepare('SELECT * FROM station_status WHERE station_id = :station_id');
+        $stmt->execute([':station_id' => $stationId]);
+        $station = $stmt->fetch(PDO::FETCH_ASSOC);
+        $station['num_bikes_available_types'] = json_decode($station['num_bikes_available_types'], true);
+        return $station;
+    }
+
+    /**
      * Récupérer toutes les status des stations
      *
      * @return array
@@ -46,7 +82,9 @@ class StationStatusRepository
     {
         $stmt = $this->db->prepare('SELECT * FROM station_status');
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $station = $stmt->fetch(PDO::FETCH_ASSOC);
+        $station['num_bikes_available_types'] = json_decode($station['num_bikes_available_types'], true);
+        return $station;
     }
 
     /**
