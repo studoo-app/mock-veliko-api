@@ -53,6 +53,7 @@ class VeloByIdController implements ControllerInterface
 		header('Content-Type: application/json');
 
         $data = (new \Repository\VeloRepository())->getVeloById($request->get('id'));
+        if ($data === false) { return json_encode("Velo not found"); }
 
         return json_encode($data);
 	}

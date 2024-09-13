@@ -57,7 +57,7 @@ class VeloRepository
      * Récupérer tous les velos
      * @return array
      */
-    public function getAllVelo(): array
+    public function getAllVelo(): array|bool
     {
         $stmt = $this->db->prepare('SELECT * FROM velo');
         $stmt->execute();
@@ -70,7 +70,7 @@ class VeloRepository
      * @param int $id
      * @return array
      */
-    public function getVeloById(int $velo_id): array
+    public function getVeloById(int $velo_id): array|bool
     {
         $stmt = $this->db->prepare('SELECT * FROM velo WHERE velo_id = :velo_id');
         $stmt->execute([
@@ -83,7 +83,7 @@ class VeloRepository
      * Récupérer tous les velos
      * @return array
      */
-    public function getVeloByStation(int $station_id): array
+    public function getVeloByStation(int $station_id): array|bool
     {
         $stmt = $this->db->prepare('SELECT * FROM velo WHERE station_id_available = :station_id_available');
         $stmt->execute([

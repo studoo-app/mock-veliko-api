@@ -55,6 +55,7 @@ class VeloController implements ControllerInterface
 		header('Content-Type: application/json');
 
         $data = (new \Repository\VeloRepository())->getAllVelo();
+        if ($data === false) { return json_encode("Velo not found"); }
 
 		return json_encode($data);
 	}

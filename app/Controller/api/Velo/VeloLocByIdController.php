@@ -49,6 +49,7 @@ class VeloLocByIdController implements ControllerInterface
         if (AuthApi::checkToken($request) === false) { return json_encode("Token is not valid"); }
 
         $Velo = (new \Repository\VeloRepository())->getVeloById($request->get('id'));
+        if ($Velo === false) { return json_encode("Velo not found"); }
         if ($Velo["status"] === "location") { return json_encode("Velo statut is location"); }
         $Velo["status"] = "location";
         (new \Repository\VeloRepository())->update($Velo);

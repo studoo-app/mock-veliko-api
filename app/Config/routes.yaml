@@ -38,6 +38,10 @@ getVeloLocById:
     uri: /api/velo/{id}/location
     controller: Controller\api\Velo\VeloLocByIdController
     httpMethod: [PUT]
+getVeloRestoreById:
+    uri: /api/velo/{velo_id}/restore/{station_id}
+    controller: Controller\api\Velo\VeloRestoreByIdController
+    httpMethod: [PUT]
 home:
     uri: /
     controller: Controller\HomeController

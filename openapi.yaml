@@ -194,3 +194,32 @@ paths:
                 /api/velo/245671/location:
                   summary: /api/velo/245671/location
                   value: { velo_id: 245671, type: mechanical, status: location, num_km_total: 234, station_id_available: 17278902806 }
+  '/api/velo/{velo_id}/restore/{station_id}':
+    put:
+      summary: getVeloRestoreById
+      description: 'Restaurer le vélo loué via son ID, Cette méthode permet de rendre le Vélo loué dans une station'
+      operationId: getVeloRestoreById
+      parameters:
+        -
+          name: velo_id
+          in: path
+          description: 'ID du vélo loué'
+          required: true
+          schema:
+            type: integer
+        -
+          name: station_id
+          in: path
+          description: "ID de la nouvelle station d'accueil"
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'L information du vélos sont transmis'
+          content:
+            application/json:
+              examples:
+                /api/velo/245671/restore/17278902806:
+                  summary: /api/velo/245671/restore/17278902806
+                  value: { velo_id: 245671, type: mechanical, status: available, num_km_total: 234, station_id_available: 17278902806 }

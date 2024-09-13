@@ -42,14 +42,14 @@ class StationRepository
      *
      * @return array
      */
-    public function getAllStations(): array
+    public function getAllStations(): array|bool
     {
         $stmt = $this->db->prepare('SELECT * FROM station');
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getOneStation(int $id): mixed
+    public function getOneStation(int $id): array|bool
     {
         $stmt = $this->db->prepare('SELECT * FROM station WHERE station_id = :id');
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -57,7 +57,7 @@ class StationRepository
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function getOneStationStatus(int $id): mixed
+    public function getOneStationStatus(int $id): array|bool
     {
         $stmt = $this->db->prepare('SELECT * FROM station, station_status WHERE station.station_id = :id AND station.station_id = station_status.station_id');
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);

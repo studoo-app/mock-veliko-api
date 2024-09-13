@@ -121,6 +121,7 @@ class StationStatusIdController implements ControllerInterface
 		header('Content-Type: application/json');
 
         $data = (new \Repository\StationRepository())->getOneStationStatus($request->get('id'));
+        if ($data === false) { return json_encode("Station not found"); }
         if ($request->get('optional') === "velo") {
             $data['bikes_available_types'] = (new VeloRepository())->getVeloByStation($request->get('id'));
         }

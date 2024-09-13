@@ -71,6 +71,7 @@ class StationsStatusController implements ControllerInterface
 		header('Content-Type: application/json');
 
         $data = (new \Repository\StationStatusRepository())->getAllStationsStatus();
+        if ($data === false) { return json_encode("Stations not found"); }
 
 		return json_encode($data);
 	}

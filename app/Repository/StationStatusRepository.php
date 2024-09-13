@@ -78,11 +78,14 @@ class StationStatusRepository
      *
      * @return array
      */
-    public function getAllStationsStatus(): array
+    public function getAllStationsStatus(): array|bool
     {
         $stmt = $this->db->prepare('SELECT * FROM station_status');
         $stmt->execute();
         $station = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($station === false) {
+            return false;
+        }
         $station['num_bikes_available_types'] = json_decode($station['num_bikes_available_types'], true);
         return $station;
     }
