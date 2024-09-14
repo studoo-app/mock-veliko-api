@@ -2,11 +2,25 @@
 
 **Présentation des versions du mock veliko**
 
+## v0.3.0 - 14/09/2024
+
+**new features**
+
+- [#10](https://github.com/studoo-app/mock-veliko-api/issues/10) Add authentification token in header @bfoujols
+- [#8](https://github.com/studoo-app/mock-veliko-api/issues/8) add gestion des données d'un vélo (location en écriture via tocken) @bfoujols
+
+**bug Fixes**
+
+- [#13](https://github.com/studoo-app/mock-veliko-api/issues/13) fix Uncaught TypeError: Repository\\VeloRepository::getVeloById() @bfoujols
+- [#11](https://github.com/studoo-app/mock-veliko-api/issues/11) fix bar debug in prod @bfoujols
+
 ## v0.2.1 - 11/09/2024
+
+**new features**
 
 - New page d'accueil @bfoujols
 - New command CLI pour lancer l'initialisation des données @bfoujols
-- Refactoring de la gestion des données @bfoujols
+- [#12](https://github.com/studoo-app/mock-veliko-api/issues/12) Refactoring gestion des données @bfoujols
 
 **bug Fixes**
 
