@@ -11,9 +11,9 @@ class    InitApi
 {
     public function getStructure(): array
     {
-        $sql01Station = file_get_contents(__DIR__ . '/../../sql/01.station.sql');
-        $sql02StationStatus = file_get_contents(__DIR__ . '/../../sql/02.station.status.sql');
-        $sql03Velo = file_get_contents(__DIR__ . '/../../sql/03.velo.sql');
+        $sql01Station = file_get_contents(__DIR__ . '/../../../sql/01.station.sql');
+        $sql02StationStatus = file_get_contents(__DIR__ . '/../../../sql/02.station.status.sql');
+        $sql03Velo = file_get_contents(__DIR__ . '/../../../sql/03.velo.sql');
 
         $db = (new DatabaseSqlite())->getManager();
         $db->exec($sql01Station);
@@ -78,7 +78,7 @@ class    InitApi
 
     public function copyConfig(): array
     {
-        copy(__DIR__ . '/../../docker/configDataset.json', __DIR__ . '/../../var/configDataset.json');
+        copy(__DIR__ . '/../../../docker/configDataset.json', __DIR__ . '/../../../var/configDataset.json');
 
         return [
             "status" => "success",
