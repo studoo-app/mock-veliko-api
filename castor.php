@@ -26,3 +26,15 @@ function doc_server_start(): void
 {
     run('source venv/bin/activate && mkdocs serve');
 }
+
+#[AsTask(name: 'docker:build', description: 'Démarrage du serveur de documentation')]
+function docker_build(): void
+{
+    run('docker compose build --no-cache && docker tag mock-veliko-api-app bfoujols/mock-veliko-api:latest && docker run -p 9042:80 bfoujols/mock-veliko-api:latest');
+}
+
+#[AsTask(name: 'docker:push', description: 'Démarrage du serveur de documentation')]
+function docker_push(): void
+{
+    run('docker tag mock-veliko-api-app bfoujols/mock-veliko-api:latest && docker push bfoujols/mock-veliko-api:latest');
+}
