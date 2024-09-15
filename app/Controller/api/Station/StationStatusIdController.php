@@ -11,6 +11,7 @@ class StationStatusIdController implements ControllerInterface
 {
 	#[Attributes\Get(
         path: '/api/station/{id}/status[/{optional}]',
+        tags: ['station'],
         operationId: 'getStationStatusById',
         description: 'Récupérer le status d une station par son ID (station_id)<br>
         Statut d une station dans son état actuel, celle-ci à une timestamp de dernière mise à jour (last_reported).<br>

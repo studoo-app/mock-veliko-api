@@ -10,6 +10,7 @@ class StationIdController implements ControllerInterface
 {
 	#[Attributes\Get(
         path: '/api/station/{id}',
+        tags: ['station'],
         operationId: 'getStationById',
         description: 'Récupérer les informations d une station par son ID (station_id)<br>
         La description des champs:<br>

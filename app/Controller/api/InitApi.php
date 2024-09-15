@@ -75,4 +75,14 @@ class    InitApi
             "message" => "API VELIKO is running"
         ];
     }
+
+    public function copyConfig(): array
+    {
+        copy(__DIR__ . '/../../docker/configDataset.json', __DIR__ . '/../../var/configDataset.json');
+
+        return [
+            "status" => "success",
+            "message" => "API VELIKO is running"
+        ];
+    }
 }

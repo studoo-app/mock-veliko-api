@@ -10,6 +10,7 @@ class StationsStatusController implements ControllerInterface
 {
 	#[Attributes\Get(
         path: '/api/stations/status',
+        tags: ['status', 'station'],
         operationId: 'getStationsStatus',
         summary: 'getStationsStatus',
         description: 'Liste des status des stations, voici la structure de données

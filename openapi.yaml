@@ -15,9 +15,11 @@ servers:
 paths:
   /api/init/data:
     get:
-      summary: initApiData
-      description: "Initialisation de l'API VELIKO se fait au dédut projet. Elle permet de récupérer les données des stations et des status des stations sur API officielle de VELIB"
-      operationId: initApiData
+      tags:
+        - Initialisation
+      summary: init-data
+      description: "Vous pouvez initialisation de l'API VELIKO. Elle permet de récupérer les données des stations et des status des stations sur API officielle de VELIB"
+      operationId: InitData
       responses:
         '200':
           description: "Initialisation de l'API VELIKO est excutée avec succès"
@@ -37,9 +39,11 @@ paths:
                   value: { status: error, message: 'Une erreur interne est survenue, veuillez regarder les logs serveur' }
   /api/init/schema:
     get:
-      summary: initApiSchema
-      description: "Initialisation de la scruture de la base de données de l'API VELIKO se fait au dédut projet. Elle permet de créer les tables de la base de données"
-      operationId: initApiSchema
+      tags:
+        - Initialisation
+      summary: init-schema
+      description: "Vous pouvez initialisation de la scruture de la base de données de l'API VELIKO. Elle permet de créer les tables de la base de données en cas de reset"
+      operationId: InitSchema
       responses:
         '200':
           description: "Initialisation de la structure de l'API VELIKO est excutée avec succès"
@@ -59,6 +63,8 @@ paths:
                   value: { status: error, message: 'Une erreur interne est survenue, veuillez regarder les logs serveur' }
   '/api/station/{id}':
     get:
+      tags:
+        - station
       description: "Récupérer les informations d une station par son ID (station_id)<br>\n        La description des champs:<br>\n        - station_id: ID de la station<br>\n        - stationCode: Code de la station<br>\n        - name: Nom de la station<br>\n        - lat: Latitude de la station<br>\n        - lon: Longitude de la station<br>\n        - capacity: Capacité de la station<br>\n        "
       operationId: getStationById
       parameters:
@@ -80,6 +86,8 @@ paths:
                   value: { station_id: 213688169, stationCode: '16107', name: 'Benjamin Godard - Victor Hugo', lat: 48.865983, lon: 2.275725, capacity: 35 }
   '/api/station/{id}/status[/{optional}]':
     get:
+      tags:
+        - station
       description: "Récupérer le status d une station par son ID (station_id)<br>\n        Statut d une station dans son état actuel, celle-ci à une timestamp de dernière mise à jour (last_reported).<br>\n        La description des champs:<br>\n        - station_id: ID de la station<br>\n        - stationCode: Code de la station<br>\n        - name: Nom de la station<br>\n        - lat: Latitude de la station<br>\n        - lon: Longitude de la station<br>\n        - capacity: Capacité de la station<br>\n        - num_bikes_available: Nombre de vélos disponibles<br>\n        - num_bikes_available_types: Nombre de vélos disponibles par type (mécanique, électrique)<br>\n        - num_docks_available: Nombre de places disponibles<br>\n        - is_installed: Installation de la station (voir dans la fonction getStationsStatus)<br>\n        - is_returning: Recevoir des vélos dans la station (voir dans la fonction getStationsStatus)<br>\n        - is_renting: Location de la station (voir dans la fonction getStationsStatus)<br>\n        - last_reported: Timestamp de la dernière mise à jour de la station<br>\n        - bikes_available_types: Liste des vélos disponibles avec distinction entre Vélib’ mécanique et électrique (optionnel)<br>\n        Voir les exemples de reponse -> -> -><br>\n        "
       operationId: getStationStatusById
       parameters:
@@ -111,6 +119,8 @@ paths:
                   value: { station_id: 17278902806, stationCode: 44015, name: 'Rouget de L isle - Watteau', lat: '48.778192750803', lon: '2.3963020229163', capacity: 20, num_bikes_available: 4, num_bikes_available_types: '[{"mechanical":1},{"ebike":2}]', num_docks_available: 16, is_installed: 1, is_returning: 1, is_renting: 1, last_reported: 1724180445, bikes_available_types: [{ velo_id: 245671, type: mechanical, status: available, num_km_total: 234, station_id_available: 17278902806 }, { velo_id: 37654, type: ebike, status: available, num_km_total: 345, station_id_available: 17278902806 }, { velo_id: 434, type: ebike, status: available, num_km_total: 457, station_id_available: 17278902806 }] }
   /api/stations:
     get:
+      tags:
+        - station
       description: "Récupérer une liste des informations des stations<br>\n        La description des champs:<br>\n        - station_id: ID de la station<br>\n        - stationCode: Code de la station<br>\n        - name: Nom de la station<br>\n        - lat: Latitude de la station<br>\n        - lon: Longitude de la station<br>\n        - capacity: Capacité de la station<br>\n        "
       operationId: getStations
       responses:
@@ -124,6 +134,9 @@ paths:
                   value: [{ station_id: 213688169, stationCode: '16107', name: 'Benjamin Godard - Victor Hugo', lat: 48.865983, lon: 2.275725, capacity: 35 }, { station_id: 36255, stationCode: '9020', name: 'Toudouze - Clauzel', lat: 48.879295917335, lon: 2.3373600840569, capacity: 21 }]
   /api/stations/status:
     get:
+      tags:
+        - status
+        - station
       summary: getStationsStatus
       description: "Liste des status des stations, voici la structure de données\n        <ul>\n            <li>station_id : numéro unique d’identification de la station. Ce numéro identifie la station au sein du service Vélib’ Métropole</li>\n            <li>is_installed : variable binaire indiquant si la station est. La station a déjà été déployée (1) ou est encore en cours de déploiement (0)</li>\n            <li>is_renting : variable binaire indiquant si la station peut louer des vélos (is_renting=1 si le statut de la station est Operative)</li>\n            <li>is_returning : variable binaire indiquant si la station peut recevoir des vélos (is_renting=1 si le statut de la station est Operative)</li>\n            <li>last_reported : date de la dernière mise-à-jour</li>\n            <li>numBikesAvailable : nombre de vélos disponibles</li>\n            <li>numDocksAvailable : nombre de bornettes disponibles</li>\n            <li>num_bikes_available : nombre de vélos disponibles</li>\n            <li>num_bikes_available_types : nombre de vélos disponibles avec distinctions entre Vélib’ mécanique et électrique</li>\n        </ul>"
       operationId: getStationsStatus
@@ -138,6 +151,8 @@ paths:
                   value: [{ station_id: '213688169', num_bikes_available: 7, num_bikes_available_types: { mechanical: 7, ebike: 0 }, num_docks_available: 16, is_installed: 1, is_returning: 1, is_renting: 1, last_reported: 1633669200 }, { station_id: '17278902806', num_bikes_available: 4, num_bikes_available_types: { mechanical: 2, ebike: 2 }, num_docks_available: 15, is_installed: 1, is_returning: 1, is_renting: 1, last_reported: 1724180746 }]
   '/api/velo/{id}':
     get:
+      tags:
+        - velo
       summary: getVeloById
       description: "Information du vélos, voici la structure de données\n        <ul>\n            <li>velo_id : numéro unique d’identification du vélo.</li>\n            <li>type : variable texte indiquant si le vélo est : mécanique (\"mechanical\") ou électrique (\"ebike\")</li>\n            <li>status : variable texte indiquant si le vélo est : opérationnel (\"available\"), en cours de location (\"location\"), en anomalie (\"fail\") ou en cours de réparation (\"repair\")</li>\n            <li>num_km_total : Nombre de kilometre</li>\n            <li>station_id_available : ID station rattaché en moment et au départ</li>\n        </ul>"
       operationId: getVeloById
@@ -160,6 +175,8 @@ paths:
                   value: { velo_id: 245671, type: mechanical, status: available, num_km_total: 234, station_id_available: 17278902806 }
   /api/velos:
     get:
+      tags:
+        - velo
       summary: getVelos
       description: "Liste des vélos, voici la structure de données\n        <ul>\n            <li>velo_id : numéro unique d’identification du vélo.</li>\n            <li>type : variable texte indiquant si le vélo est : mécanique (\"mechanical\") ou électrique (\"ebike\")</li>\n            <li>status : variable texte indiquant si le vélo est : opérationnel (\"available\"), en cours de location (\"location\"), en anomalie (\"fail\") ou en cours de réparation (\"repair\")</li>\n            <li>num_km_total : Nombre de kilometre</li>\n            <li>station_id_available : ID station rattaché en moment et au départ</li>\n        </ul>"
       operationId: getVelos
@@ -174,6 +191,8 @@ paths:
                   value: [{ velo_id: 245671, type: mechanical, status: available, num_km_total: 234, station_id_available: 17278902806 }, { velo_id: 434, type: ebike, status: available, num_km_total: 457, station_id_available: 17278902806 }]
   '/api/velo/{id}/location':
     put:
+      tags:
+        - velo
       summary: getVeloLocById
       description: 'Location du vélo via son ID, Cette méthode permet de retirer le Vélo de la station'
       operationId: getVeloLocById
@@ -199,6 +218,8 @@ paths:
           HeaderAuthorization: []
   '/api/velo/{velo_id}/restore/{station_id}':
     put:
+      tags:
+        - velo
       summary: getVeloRestoreById
       description: 'Restaurer le vélo loué via son ID, Cette méthode permet de rendre le Vélo loué dans une station'
       operationId: getVeloRestoreById
@@ -237,3 +258,16 @@ components:
       name: Authorization
       in: header
       scheme: header
+tags:
+  -
+    name: Initialisation
+    description: Initialisation
+  -
+    name: station
+    description: station
+  -
+    name: status
+    description: status
+  -
+    name: velo
+    description: velo

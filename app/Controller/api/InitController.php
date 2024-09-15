@@ -10,9 +10,10 @@ class InitController implements ControllerInterface
 {
     #[Attributes\Get(
         path: '/api/init/data',
-        operationId: 'initApiData',
-        summary: 'initApiData',
-        description: 'Initialisation de l\'API VELIKO se fait au dédut projet. Elle permet de récupérer les données des stations et des status des stations sur API officielle de VELIB',
+        tags: ['Initialisation'],
+        operationId: 'InitData',
+        summary: 'init-data',
+        description: 'Vous pouvez initialisation de l\'API VELIKO. Elle permet de récupérer les données des stations et des status des stations sur API officielle de VELIB',
     )]
     #[Attributes\Response(
         response: '200',
@@ -53,6 +54,7 @@ class InitController implements ControllerInterface
         header('Content-Type: application/json');
 
         try {
+            (new \Controller\api\InitApi())->copyConfig();
             $listTest = (new \Controller\api\InitApi())->getData();
         } catch (\Exception $e) {
             http_response_code(500);

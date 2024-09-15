@@ -21,7 +21,7 @@ function install(): void
 }
 
 
-#[AsTask(name: 'doc:start:serv', description: 'Démarrage du serveur de documentation')]
+#[AsTask(name: 'doc:start', description: 'Démarrage du serveur de documentation')]
 function doc_server_start(): void
 {
     run('source venv/bin/activate && mkdocs serve');

@@ -11,6 +11,7 @@ class VeloRestoreByIdController implements ControllerInterface
 {
 	#[Attributes\Put(
         path: '/api/velo/{velo_id}/restore/{station_id}',
+        tags: ['velo'],
         operationId: 'getVeloRestoreById',
         summary: 'getVeloRestoreById',
         description: 'Restaurer le vélo loué via son ID, Cette méthode permet de rendre le Vélo loué dans une station',

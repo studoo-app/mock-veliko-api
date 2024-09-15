@@ -14,6 +14,7 @@ class InitCommand extends \Studoo\EduFramework\Commands\Extends\CommandManage
 
             (new \Controller\api\InitApi())->getStructure();
             (new \Controller\api\InitApi())->getData();
+            (new \Controller\api\InitApi())->copyConfig();
 
 		    return Command::SUCCESS;
 	}

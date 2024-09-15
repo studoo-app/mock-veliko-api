@@ -10,6 +10,7 @@ class VeloController implements ControllerInterface
 {
 	#[Attributes\Get(
         path: '/api/velos',
+        tags: ['velo'],
         operationId: 'getVelos',
         summary: 'getVelos',
         description: 'Liste des vélos, voici la structure de données

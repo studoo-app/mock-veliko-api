@@ -10,9 +10,10 @@ class SchemaController implements ControllerInterface
 {
     #[Attributes\Get(
         path: '/api/init/schema',
-        operationId: 'initApiSchema',
-        summary: 'initApiSchema',
-        description: 'Initialisation de la scruture de la base de données de l\'API VELIKO se fait au dédut projet. Elle permet de créer les tables de la base de données',
+        tags: ['Initialisation'],
+        operationId: 'InitSchema',
+        summary: 'init-schema',
+        description: 'Vous pouvez initialisation de la scruture de la base de données de l\'API VELIKO. Elle permet de créer les tables de la base de données en cas de reset',
     )]
     #[Attributes\Response(
         response: '200',

@@ -11,6 +11,7 @@ class VeloLocByIdController implements ControllerInterface
 {
 	#[Attributes\Put(
         path: '/api/velo/{id}/location',
+        tags: ['velo'],
         operationId: 'getVeloLocById',
         summary: 'getVeloLocById',
         description: 'Location du vélo via son ID, Cette méthode permet de retirer le Vélo de la station',
