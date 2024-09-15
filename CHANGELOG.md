@@ -2,6 +2,19 @@
 
 **Présentation des versions du mock veliko**
 
+## v0.3.2 - 15/09/2024
+
+**new features**
+
+- [#10](https://github.com/studoo-app/mock-veliko-api/issues/10) Add tag in openAPI @bfoujols
+
+
+## v0.3.1 - 14/09/2024
+
+**new features**
+
+- [#10](https://github.com/studoo-app/mock-veliko-api/issues/10) Customisation du token d'authentification + local database sqlite @bfoujols
+
 ## v0.3.0 - 14/09/2024
 
 **new features**
