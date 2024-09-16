@@ -19,3 +19,15 @@ L'API Velib est une API REST qui permet de récupérer des informations sur les 
 !!! warning "Information importante"
 
     Voici le lien de l'API officielle : [https://www.velib-metropole.fr/donnees-open-data-gbfs-du-service-velib-metropole](https://www.velib-metropole.fr/donnees-open-data-gbfs-du-service-velib-metropole){:target="_blank"}
+
+## stack technique
+
+- Core code : [Edu framework](https://studoo-app.github.io/edu-framework/){:target="_blank"}
+- Format Documentation API : [OpenAPI 3.0.0](https://www.openapis.org/){:target="_blank"}
+- Build Documentation API : [Redocly](https://redocly.com/){:target="_blank"}
+- Container : [Docker](https://www.docker.com/){:target="_blank"}
+- Database : [SQLite](https://www.sqlite.org/index.html){:target="_blank"}
+- Client API : [Bruno](https://www.usebruno.com/){:target="_blank"}
+- Documentation : [Mkdocs](https://www.mkdocs.org/){:target="_blank"}
+- Task runner : [Castor](https://castor.jolicode.com/){:target="_blank"}
+- CI/CD : [Github Actions](https://github.com/features/actions){:target="_blank"}
