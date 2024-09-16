@@ -7,6 +7,7 @@
 **new features**
 
 - [#10](https://github.com/studoo-app/mock-veliko-api/issues/10) Add tag in openAPI @bfoujols
+- Change socket 8042 to 9042 @bfoujols
 
 ## v0.3.1 - 14/09/2024
 
