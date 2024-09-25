@@ -1,4 +1,4 @@
-## Personnaliser Mcck API
+## Personnaliser Mock API
 
 Dans le cas ou vous souhaitez personnaliser le mock de API, vous pouvez à partir de la version v0.3.0.
 

@@ -7,7 +7,7 @@ Celà veut dire que l'ensemble de la documentation est dans des annotations dans
 
     Vous pouvez consulter la documentation de l'API à l'adresse suivante : [http://localhost:9042/doc](http://localhost:9042/doc){:target="_blank"}
 
-    N'oublier pas de démarrer l'API avant de consulter la documentation. :wink:
+    N'oubliez pas de démarrer l'API avant de consulter la documentation. :wink:
 
 Gràce à cette documentation, vous pouvez tester les différentes routes de l'API.
 
