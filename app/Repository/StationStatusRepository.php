@@ -82,11 +82,13 @@ class StationStatusRepository
     {
         $stmt = $this->db->prepare('SELECT * FROM station_status');
         $stmt->execute();
-        $station = $stmt->fetch(PDO::FETCH_ASSOC);
+        $station = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if ($station === false) {
             return false;
         }
-        $station['num_bikes_available_types'] = json_decode($station['num_bikes_available_types'], true);
+        foreach ($station as $key => $value) {
+            $station[$key]['num_bikes_available_types'] = json_decode($value['num_bikes_available_types'], true);
+        }
         return $station;
     }
 

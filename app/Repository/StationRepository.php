@@ -62,7 +62,10 @@ class StationRepository
         $stmt = $this->db->prepare('SELECT * FROM station, station_status WHERE station.station_id = :id AND station.station_id = station_status.station_id');
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $station = $stmt->fetch(PDO::FETCH_ASSOC);
+        $station['num_bikes_available_types'] = json_decode($station['num_bikes_available_types'], true);
+        return $station;
+
     }
 
     /**
