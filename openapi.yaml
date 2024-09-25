@@ -1,14 +1,14 @@
 openapi: 3.0.0
 info:
   title: 'API VELIKO'
-  description: 'API VELIKO est une API de gestion des stations de vélos en libre service'
+  description: 'API VELIKO est une API de gestion des stations de vélos en libre service <br> Documentation : https://studoo-app.github.io/mock-veliko-api/'
   contact:
     name: 'Benoit Foujols'
     email: Benoit.Foujols@ac-creteil.fr
   license:
     name: MIT
     url: 'https://opensource.org/licenses/MIT'
-  version: 0.3.1
+  version: 0.3.2
 servers:
   -
     url: 'http://localhost:9042'
