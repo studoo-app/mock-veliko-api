@@ -1,7 +1,7 @@
 services:
   app:
     container_name: mock-veliko-api
-    build: ./docker/php
+    build: .
     ports:
       - "9042:80"
     #    volumes:
